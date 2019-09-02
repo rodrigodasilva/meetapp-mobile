@@ -13,7 +13,7 @@ import {
   TextLinkSignIn,
 } from './styles';
 
-export default function SignIn() {
+export default function SignIn({ navigation }) {
   return (
     <Background>
       <Container>
@@ -21,6 +21,7 @@ export default function SignIn() {
         <FormInput
           icon="mail-outline"
           autoCapitalize="none"
+          keyboardType="email-address"
           autoCorrect={false}
           placeholder="Digite seu nome"
         />
@@ -32,7 +33,7 @@ export default function SignIn() {
 
         <ButtonSubmit onPress={() => {}}>Entrar</ButtonSubmit>
 
-        <LinkSignIn>
+        <LinkSignIn onPress={() => navigation.navigate('SignUp')}>
           <TextLinkSignIn>Criar uma conta</TextLinkSignIn>
         </LinkSignIn>
       </Container>
