@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { signUpRequest } from '~/store/modules/auth/actions';
 
 import logo from '~/assets/logo.png';
 
@@ -13,7 +16,27 @@ import {
   TextLinkSignIn,
 } from './styles';
 
-export default function SignIn({ navigation }) {
+export default function SignUp({ navigation }) {
+  const dispatch = useDispatch();
+
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const loading = useSelector(state => state.auth.loading);
+  // const created = useSelector(state => state.auth.created);
+
+  // if (created) {
+  //   navigation.navigate('SignIn');
+  // }
+
+  function handleSubmit() {
+    dispatch(signUpRequest(name, email, password));
+  }
+
   return (
     <Background>
       <Container>
@@ -23,6 +46,10 @@ export default function SignIn({ navigation }) {
           autoCapitalize="none"
           autoCorrect={false}
           placeholder="Digite seu nome"
+          returnKeyType="next"
+          onSubmitEditing={() => emailRef.current.focus()}
+          value={name}
+          onChangeText={setName}
         />
 
         <FormInput
@@ -31,14 +58,26 @@ export default function SignIn({ navigation }) {
           autoCapitalize="none"
           autoCorrect={false}
           placeholder="Digite seu email"
+          ref={emailRef}
+          returnKeyType="next"
+          onSubmitEditing={() => passwordRef.current.focus()}
+          value={email}
+          onChangeText={setEmail}
         />
         <FormInput
           icon="lock-outline"
           secureTextEntry
           placeholder="Digite sua senha"
+          ref={passwordRef}
+          returnKeyType="send"
+          onSubmitEditing={handleSubmit}
+          value={password}
+          onChangeText={setPassword}
         />
 
-        <ButtonSubmit onPress={() => {}}>Criar</ButtonSubmit>
+        <ButtonSubmit loading={loading} onPress={handleSubmit}>
+          Criar
+        </ButtonSubmit>
 
         <LinkSignIn onPress={() => navigation.navigate('SignIn')}>
           <TextLinkSignIn>Já sou cadastrado</TextLinkSignIn>
