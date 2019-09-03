@@ -14,7 +14,6 @@ import {
 } from './styles';
 
 export default function SignIn({ navigation }) {
-  console.tron.log('SIGIN', 'TESTE');
   return (
     <Background>
       <Container>
