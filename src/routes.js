@@ -34,6 +34,10 @@ export default (isSigned = false) =>
               style: {
                 backgroundColor: '#2B1A2F',
               },
+              tabStyle: {
+                heigth: 64,
+                padding: 5,
+              },
             },
           }
         ),
