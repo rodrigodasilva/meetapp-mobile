@@ -6,7 +6,7 @@ export const DateMeetup = styled.View`
   justify-content: center;
   align-items: center;
   margin-top: 34px;
-  margin-bottom: 34px;
+  margin-bottom: 24px;
 `;
 
 export const TextDate = styled.Text`

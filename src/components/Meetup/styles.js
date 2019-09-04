@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   background: #fff;
-  margin: 0 20px;
+  margin: 10px 20px;
   border-radius: 4px;
 `;
 
@@ -47,13 +47,14 @@ export const Button = styled.TouchableOpacity`
   background: #f94d6a;
   border-radius: 4px;
 
-  display: flex;
+  display: ${props =>
+    props.checkIfUserAppIsEqualMeetupOrganizer ? 'none' : 'flex'};
   align-items: center;
   justify-content: center;
 `;
 
 export const TextButton = styled.Text`
-  color: #fff;
-  font-size: 16px;
+  color: ${props => (props.subscription ? '#f94d6a' : '#fff')};
+  font-size: ${props => (props.subscription ? '20px' : '16px')};
   font-weight: bold;
 `;

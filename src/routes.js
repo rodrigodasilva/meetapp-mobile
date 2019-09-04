@@ -33,9 +33,9 @@ export default (isSigned = false) =>
               inactiveTintColor: 'rgba(255, 255, 255, .6)',
               style: {
                 backgroundColor: '#2B1A2F',
+                borderTopColor: '#2b1a2f',
               },
               tabStyle: {
-                heigth: 64,
                 padding: 5,
               },
             },
