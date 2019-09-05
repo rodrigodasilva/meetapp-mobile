@@ -13,15 +13,18 @@ import Meetup from '~/components/Meetup';
 
 import api from '~/services/api';
 
-import { DateMeetup, TextDate } from './styles';
+import { Container, DateMeetup, TextDate, TextEmpty } from './styles';
 
 export default function Dashboard() {
   const user = useSelector(state => state.user.profile);
   const idUserApp = user.id;
 
   const [meetups, setMeetups] = useState('');
-  const [subscriptions, setSubscritions] = useState([]);
+  // const [subscriptions, setSubscritions] = useState([]);
   const [dateSearch, setDateSearch] = useState(new Date());
+
+  const [loadingCenter, setLoadingCenter] = useState(true);
+  const [loadingBottom, setLoadingBottom] = useState(false);
 
   const [page, setPage] = useState(1);
 
@@ -31,6 +34,12 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function loadMeetups() {
+      if (page === 1) {
+        setLoadingCenter(true);
+      } else {
+        setLoadingBottom(true);
+      }
+
       const dateFormattedToSearch = format(dateSearch, 'yyyy-MM-dd', {
         locale: pt,
       });
@@ -42,15 +51,17 @@ export default function Dashboard() {
       const responseMeetups =
         page >= 2 ? [...meetups, ...response.data] : response.data;
       setMeetups(responseMeetups);
+      setLoadingCenter(false);
+      setLoadingBottom(false);
     }
 
-    async function loadSubscriptions() {
-      const response = await api.get('subscriptions');
-      setSubscritions(response.data);
-    }
+    // async function loadSubscriptions() {
+    //   const response = await api.get('subscriptions');
+    //   setSubscritions(response.data);
+    // }
 
     loadMeetups();
-    loadSubscriptions();
+    // loadSubscriptions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dateSearch, page]);
 
@@ -72,6 +83,17 @@ export default function Dashboard() {
     setPage(page + 1);
   }
 
+  function renderFooter() {
+    if (!loadingBottom) return null;
+    return (
+      <ActivityIndicator
+        size={30}
+        color="#F94D6A"
+        style={{ backgroundColor: 'rgba(0,0,0,0.0)' }}
+      />
+    );
+  }
+
   return (
     <Background>
       <TopBar />
@@ -88,22 +110,37 @@ export default function Dashboard() {
         </TouchableOpacity>
       </DateMeetup>
 
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={meetups}
-        onEndReachedThreshold={0.2}
-        onEndReached={loadMore}
-        keyExtractor={item => String(item.id)}
-        renderItem={({ item }) => (
-          <Meetup
-            data={item}
-            onPress={() => handleSubscription(item)}
-            textButton="Realizar Inscrição"
-            idUserApp={idUserApp}
-            subscriptions={subscriptions}
-          />
-        )}
-      />
+      {loadingCenter ? (
+        <Container>
+          <ActivityIndicator size={50} color="#fff" />
+        </Container>
+      ) : (
+        <>
+          {meetups.length > 0 ? (
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={meetups}
+              onEndReachedThreshold={0.1}
+              onEndReached={loadMore}
+              ListFooterComponent={renderFooter}
+              keyExtractor={item => String(item.id)}
+              renderItem={({ item }) => (
+                <Meetup
+                  data={item}
+                  onPress={() => handleSubscription(item)}
+                  textButton="Realizar Inscrição"
+                  idUserApp={idUserApp}
+                  // subscriptions={subscriptions}
+                />
+              )}
+            />
+          ) : (
+            <Container>
+              <TextEmpty>Nenhum Meetup</TextEmpty>
+            </Container>
+          )}
+        </>
+      )}
     </Background>
   );
 }

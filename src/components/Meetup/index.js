@@ -39,7 +39,7 @@ export default function Meetup({
   //   return subscription.meetup_id === data.id ? setTeste(true) : false;
   // });
 
-  console.tron.log('Subscriptions', subscriptions);
+  // console.tron.log('Subscriptions', subscriptions);
   // console.tron.log('ESTATE_Subscriptions', stateSubscription);
 
   return (

@@ -21,11 +21,10 @@ export const Title = styled.Text`
   font-size: 18px;
   font-weight: bold;
   color: #333333;
-  margin-bottom: 10px;
 `;
 
 export const ViewTextItem = styled.View`
-  margin-bottom: 10px;
+  margin-top: 10px;
 
   display: flex;
   flex-direction: row;
@@ -40,7 +39,7 @@ export const TextItem = styled.Text`
 `;
 
 export const Button = styled.TouchableOpacity`
-  margin-top: 5px;
+  margin-top: 15px;
   width: 100%;
   height: 40px;
   padding: 12px;
