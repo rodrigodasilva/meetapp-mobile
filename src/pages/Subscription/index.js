@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Background from '~/components/Background';
 import TopBar from '~/components/TopBar';
+import Meetup from '~/components/Meetup';
 
 // import { Container } from './styles';
 

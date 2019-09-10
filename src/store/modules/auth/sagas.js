@@ -3,12 +3,7 @@ import { Alert } from 'react-native';
 
 import api from '~/services/api';
 
-import {
-  signInSuccess,
-  signFailure,
-  // signUpSuccess,
-  // signUpFailure,
-} from './actions';
+import { signInSuccess, signFailure } from './actions';
 
 export function* signIn({ payload }) {
   try {
@@ -41,11 +36,8 @@ export function* signUp({ payload }) {
       password,
     });
 
-    // yield put(signUpSuccess());
-
     Alert.alert('Concluido', 'Cadastro realizado com sucesso');
   } catch (err) {
-    yield put(signUpFailure());
     Alert.alert('Erro', 'Falha no cadastro, verifique seus dados');
 
     yield put(signFailure());

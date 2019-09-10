@@ -16,6 +16,7 @@ import {
   TextItem,
   Button,
   TextButton,
+  TextAlreadySubscription,
 } from './styles';
 
 export default function Meetup({
@@ -35,12 +36,14 @@ export default function Meetup({
 
   const checkIfUserAppIsEqualMeetupOrganizer = idUserApp === data.User.id;
 
-  // const stateSubscription = subscriptions.filter(subscription => {
-  //   return subscription.meetup_id === data.id ? setTeste(true) : false;
-  // });
+  const checkStateSubscription = subscriptions.find(subscription => {
+    return subscription.meetup_id === data.id;
+  });
 
-  // console.tron.log('Subscriptions', subscriptions);
-  // console.tron.log('ESTATE_Subscriptions', stateSubscription);
+  console.tron.log('Subscriptions', subscriptions);
+  if (checkStateSubscription) {
+    console.tron.log('ESTATE_Subscriptions', checkStateSubscription);
+  }
 
   return (
     <Container>
@@ -64,23 +67,26 @@ export default function Meetup({
         <ViewTextItem>
           <IconMI name="person" size={14} color="#999" />
           <TextItem>
-            Organizado por:
-            {checkIfUserAppIsEqualMeetupOrganizer ? ' Você' : data.User.name}
+            Organizado por:{' '}
+            {checkIfUserAppIsEqualMeetupOrganizer ? 'Você' : data.User.name}
           </TextItem>
         </ViewTextItem>
 
-        {/* {stateSubscription ? (
-          <TextButton subscription>Você já está inscrito</TextButton>
-        ) : ( */}
-        <Button
-          onPress={onPress}
-          checkIfUserAppIsEqualMeetupOrganizer={
-            checkIfUserAppIsEqualMeetupOrganizer
-          }
-        >
-          <TextButton>{textButton}</TextButton>
-        </Button>
-        {/* )} */}
+        {checkStateSubscription ? (
+          <TextAlreadySubscription checkStateSubscription>
+            Você já está inscrito
+          </TextAlreadySubscription>
+        ) : (
+          <Button
+            onPress={onPress}
+            checkIfUserAppIsEqualMeetupOrganizer={
+              checkIfUserAppIsEqualMeetupOrganizer
+            }
+            past={data.past}
+          >
+            <TextButton>{textButton}</TextButton>
+          </Button>
+        )}
       </Body>
     </Container>
   );

@@ -47,13 +47,21 @@ export const Button = styled.TouchableOpacity`
   border-radius: 4px;
 
   display: ${props =>
-    props.checkIfUserAppIsEqualMeetupOrganizer ? 'none' : 'flex'};
+    props.checkIfUserAppIsEqualMeetupOrganizer || props.past ? 'none' : 'flex'};
   align-items: center;
   justify-content: center;
 `;
 
 export const TextButton = styled.Text`
-  color: ${props => (props.subscription ? '#f94d6a' : '#fff')};
-  font-size: ${props => (props.subscription ? '20px' : '16px')};
+  color: #fff;
+  font-size: 16px;
   font-weight: bold;
+`;
+
+export const TextAlreadySubscription = styled.Text`
+  color: #f94d6a;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+  align-self: center;
 `;
