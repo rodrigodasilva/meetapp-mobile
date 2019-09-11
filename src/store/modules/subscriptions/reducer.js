@@ -1,7 +1,7 @@
 import produce from 'immer';
 
 const INITIAL_STATE = {
-  data: '',
+  data: [],
 };
 
 export default function auth(state = INITIAL_STATE, action) {
@@ -13,7 +13,7 @@ export default function auth(state = INITIAL_STATE, action) {
       }
 
       case '@subscriptions/NEW_SUBSCRIPTION_SUCCESS': {
-        draft.data = [{ ...state.data, ...action.payload.subscription }];
+        draft.data = [...state.data, action.payload.subscription];
         break;
       }
 

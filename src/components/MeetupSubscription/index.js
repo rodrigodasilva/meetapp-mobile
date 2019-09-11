@@ -5,8 +5,6 @@ import pt from 'date-fns/locale/pt';
 import IconMCI from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconMI from 'react-native-vector-icons/MaterialIcons';
 
-import {} from '~/store/modules/subscriptions/actions';
-
 import {
   Container,
   Banner,

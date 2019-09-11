@@ -10,6 +10,8 @@ import MeetupSubscription from '~/components/MeetupSubscription';
 
 import { deleteSubscriptionRequest } from '~/store/modules/subscriptions/actions';
 
+import { Container, TextEmpty } from './styles';
+
 export default function Subscription() {
   const subscriptions = useSelector(state => state.subscriptions.data);
 
@@ -22,23 +24,26 @@ export default function Subscription() {
   return (
     <Background>
       <TopBar />
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={subscriptions}
-        // onEndReachedThreshold={0.1}
-        // onEndReached={loadMore}
-        // ListFooterComponent={renderFooter}
-        keyExtractor={item => String(item.id)}
-        renderItem={({ item }) => (
-          <MeetupSubscription
-            data={item}
-            onPress={() => handleCancelSubscription(item.id)}
-            textButton="Cancelar Inscrição"
-            // idUserApp={idUserApp}
-            // subscriptions={subscriptions}
-          />
-        )}
-      />
+      {subscriptions.length > 0 ? (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={subscriptions}
+          keyExtractor={item => String(item.id)}
+          renderItem={({ item }) => (
+            <MeetupSubscription
+              data={item}
+              onPress={() => handleCancelSubscription(item.id)}
+              textButton="Cancelar Inscrição"
+            />
+          )}
+        />
+      ) : (
+        <>
+          <Container>
+            <TextEmpty>Nenhuma Inscrição</TextEmpty>
+          </Container>
+        </>
+      )}
     </Background>
   );
 }
