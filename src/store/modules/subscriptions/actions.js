@@ -18,3 +18,17 @@ export function newSubscriptionSuccess(subscription) {
     payload: { subscription },
   };
 }
+
+export function deleteSubscriptionRequest(id) {
+  return {
+    type: '@subscriptions/DELETE_SUBSCRIPTION_REQUEST',
+    payload: { id },
+  };
+}
+
+export function deleteSubscriptionSuccess(id) {
+  return {
+    type: '@subscriptions/DELETE_SUBSCRIPTION_SUCCESS',
+    payload: { id },
+  };
+}

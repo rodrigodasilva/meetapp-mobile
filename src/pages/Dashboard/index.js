@@ -9,7 +9,7 @@ import IconFA from 'react-native-vector-icons/FontAwesome';
 
 import Background from '~/components/Background';
 import TopBar from '~/components/TopBar';
-import Meetup from '~/components/Meetup';
+import MeetupDashboard from '~/components/MeetupDashboard';
 
 import api from '~/services/api';
 
@@ -75,7 +75,6 @@ export default function Dashboard() {
   }, [dateSearch, page]);
 
   async function handleSubscription(meetup) {
-    // const response = await api.post(`meetups/${meetup.id}/subscriptions`);
     dispatch(newSubscriptionRequest(meetup.id));
   }
 
@@ -135,7 +134,7 @@ export default function Dashboard() {
               ListFooterComponent={renderFooter}
               keyExtractor={item => String(item.id)}
               renderItem={({ item }) => (
-                <Meetup
+                <MeetupDashboard
                   data={item}
                   onPress={() => handleSubscription(item)}
                   textButton="Realizar Inscrição"

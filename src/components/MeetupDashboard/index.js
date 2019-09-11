@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
@@ -19,31 +19,35 @@ import {
   TextAlreadySubscription,
 } from './styles';
 
-export default function Meetup({
+export default function MeetupDashboard({
   data,
   textButton,
   onPress,
   idUserApp,
   subscriptions,
 }) {
-  const dateFormatted = format(
-    parseISO(data.date),
-    "dd ' de ' MMMM ', às ' HH:mm'h'",
-    {
-      locale: pt,
-    }
-  );
+  const [dateFormatted, setDateFormatted] = useState('');
+  const [
+    checkIfUserAppIsEqualMeetupOrganizer,
+    setCheckIfUserAppIsEqualMeetupOrganizer,
+  ] = useState('');
+  const [checkStateSubscription, setCheckStateSubscription] = useState('');
 
-  const checkIfUserAppIsEqualMeetupOrganizer = idUserApp === data.User.id;
+  useEffect(() => {
+    setDateFormatted(
+      format(parseISO(data.date), "dd ' de ' MMMM ', às ' HH:mm'h'", {
+        locale: pt,
+      })
+    );
 
-  const checkStateSubscription = subscriptions.find(subscription => {
-    return subscription.meetup_id === data.id;
-  });
+    setCheckIfUserAppIsEqualMeetupOrganizer(idUserApp === data.User.id);
 
-  console.tron.log('Subscriptions', subscriptions);
-  if (checkStateSubscription) {
-    console.tron.log('ESTATE_Subscriptions', checkStateSubscription);
-  }
+    setCheckStateSubscription(
+      subscriptions.find(subscription => {
+        return subscription.meetup_id === data.id;
+      })
+    );
+  }, [data, idUserApp, subscriptions]);
 
   return (
     <Container>
@@ -73,9 +77,7 @@ export default function Meetup({
         </ViewTextItem>
 
         {checkStateSubscription ? (
-          <TextAlreadySubscription checkStateSubscription>
-            Você já está inscrito
-          </TextAlreadySubscription>
+          <TextAlreadySubscription>Você está inscrito</TextAlreadySubscription>
         ) : (
           <Button
             onPress={onPress}
