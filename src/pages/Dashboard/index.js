@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ActivityIndicator, TouchableOpacity, FlatList } from 'react-native';
 
@@ -18,21 +18,25 @@ import {
   newSubscriptionRequest,
 } from '~/store/modules/subscriptions/actions';
 
-import { Container, DateMeetup, TextDate, TextEmpty } from './styles';
+import {
+  Container,
+  DateMeetup,
+  TextDate,
+  TextEmpty,
+  EmptyView,
+} from './styles';
 
 export default function Dashboard() {
   const user = useSelector(state => state.user.profile);
   const idUserApp = user.id;
   const subscriptions = useSelector(state => state.subscriptions.data);
-  // console.tron.log('SUBSCRIPTIONS', subscriptions);
 
   const dispatch = useDispatch();
 
   const [meetups, setMeetups] = useState('');
   const [dateSearch, setDateSearch] = useState(new Date());
 
-  const [loadingCenter, setLoadingCenter] = useState(true);
-  const [loadingBottom, setLoadingBottom] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
 
   const dateFormattedToDisplay = useMemo(() => {
@@ -41,26 +45,28 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function loadMeetups() {
-      if (page === 1) {
-        setLoadingCenter(true);
-      } else {
-        setLoadingBottom(true);
+      try {
+        // if (loading) return;
+
+        setLoading(true);
+
+        const dateFormattedToSearch = format(dateSearch, 'yyyy-MM-dd', {
+          locale: pt,
+        });
+
+        const response = await api.get(
+          `meetups?date=${dateFormattedToSearch}&page=${page}`
+        );
+
+        const responseMeetups =
+          page >= 2 ? [...meetups, ...response.data] : response.data;
+
+        setMeetups(responseMeetups);
+      } catch (err) {
+        console.tron.log('ERROR_DASHBOARD', err);
+      } finally {
+        setLoading(false);
       }
-
-      const dateFormattedToSearch = format(dateSearch, 'yyyy-MM-dd', {
-        locale: pt,
-      });
-
-      const response = await api.get(
-        `meetups?date=${dateFormattedToSearch}&page=${page}`
-      );
-
-      const responseMeetups =
-        page >= 2 ? [...meetups, ...response.data] : response.data;
-
-      setMeetups(responseMeetups);
-      setLoadingCenter(false);
-      setLoadingBottom(false);
     }
 
     async function loadSubscriptions() {
@@ -93,12 +99,17 @@ export default function Dashboard() {
   }
 
   function renderFooter() {
-    if (!loadingBottom) return null;
+    // if (!loadingBottom) {
+    //   return <EmptyView />;
+    // }
+
+    if (!loading) return null;
+
     return (
       <ActivityIndicator
         size={30}
         color="#F94D6A"
-        style={{ backgroundColor: 'rgba(0,0,0,0.0)' }}
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.0)' }}
       />
     );
   }
@@ -119,7 +130,7 @@ export default function Dashboard() {
         </TouchableOpacity>
       </DateMeetup>
 
-      {loadingCenter ? (
+      {loading && page === 1 ? (
         <Container>
           <ActivityIndicator size={50} color="#fff" />
         </Container>
@@ -129,7 +140,7 @@ export default function Dashboard() {
             <FlatList
               showsVerticalScrollIndicator={false}
               data={meetups}
-              onEndReachedThreshold={0.1}
+              onEndReachedThreshold={0.01}
               onEndReached={loadMore}
               ListFooterComponent={renderFooter}
               keyExtractor={item => String(item.id)}

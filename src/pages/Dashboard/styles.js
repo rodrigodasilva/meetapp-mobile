@@ -28,3 +28,9 @@ export const TextEmpty = styled.Text`
   font-size: 25px;
   opacity: 0.8;
 `;
+
+export const EmptyView = styled.View`
+  /* height: 40px; */
+  display: flex;
+  flex: 1;
+`;
