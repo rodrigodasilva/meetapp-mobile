@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { signInRequest } from '~/store/modules/auth/actions';
+import { signInRequest, signUpFailure } from '~/store/modules/auth/actions';
 
 import logo from '~/assets/logo.png';
 
@@ -19,12 +19,12 @@ import {
 export default function SignIn({ navigation }) {
   const dispatch = useDispatch();
 
+  dispatch(signUpFailure());
+
   const passwordRef = useRef();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const loading = useSelector(state => state.auth.loading);
 
   function handleSubmit() {
     dispatch(signInRequest(email, password));
@@ -56,14 +56,9 @@ export default function SignIn({ navigation }) {
           onChangeText={setPassword}
         />
 
-        <ButtonSubmit loading={loading} onPress={handleSubmit}>
-          Entrar
-        </ButtonSubmit>
+        <ButtonSubmit onPress={handleSubmit}>Entrar</ButtonSubmit>
 
-        <LinkSignIn
-          loading={loading}
-          onPress={() => navigation.navigate('SignUp')}
-        >
+        <LinkSignIn onPress={() => navigation.navigate('SignUp')}>
           <TextLinkSignIn>Criar uma conta</TextLinkSignIn>
         </LinkSignIn>
       </Container>

@@ -26,12 +26,13 @@ export default function SignUp({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const loading = useSelector(state => state.auth.loading);
-  // const created = useSelector(state => state.auth.created);
+  const created = useSelector(state => state.auth.created);
 
-  // if (created) {
-  //   navigation.navigate('SignIn');
-  // }
+  useEffect(() => {
+    if (created) {
+      navigation.navigate('SignIn');
+    }
+  }, [created, navigation]);
 
   function handleSubmit() {
     dispatch(signUpRequest(name, email, password));
@@ -75,9 +76,7 @@ export default function SignUp({ navigation }) {
           onChangeText={setPassword}
         />
 
-        <ButtonSubmit loading={loading} onPress={handleSubmit}>
-          Criar
-        </ButtonSubmit>
+        <ButtonSubmit onPress={handleSubmit}>Criar</ButtonSubmit>
 
         <LinkSignIn onPress={() => navigation.navigate('SignIn')}>
           <TextLinkSignIn>Já sou cadastrado</TextLinkSignIn>

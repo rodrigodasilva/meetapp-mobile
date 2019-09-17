@@ -1,14 +1,19 @@
 <h1 align="center">
   <br>
-
+  <img src="https://user-images.githubusercontent.com/28466370/65008804-ebb08980-d8e0-11e9-8cd3-429342052438.png" width="150px">
   <br>
-  MeetApp
+  Meetapp Web
   <br>
 </h1>
 
-Esta é uma parte do projeto desenvolvido para o desafio final no Bootcamp da Rocketseat. Nele desenvolvemos um serviço onde os usuários podem criar eventos atráves da aplicação Web feita em [ReactJS](https://github.com/rodrigodasilva/meetapp-front-web), e se inscrever nestes eventos utilizando o aplicativo feito em [React-native](https://github.com/rodrigodasilva/meetapp-mobile), sendo toda a lógica gerenciada pela api desenvolvida em [NodeJS](https://github.com/rodrigodasilva/backend-meetapp)
+<p align="center">
+  <a href="#tecnologias-utilizadas">Tecnologias</a> |
+  <a href="#como-usar">Como Usar</a>
+</p>
 
-#### Tecnologias utilizadas
+Esta é uma parte do projeto desenvolvido para o desafio final no Bootcamp da Rocketseat. Nele desenvolvemos um serviço onde os usuários podem criar eventos atráves da [aplicação Web](https://github.com/rodrigodasilva/meetapp-front-web) feita em ReactJS, e se inscrever nestes eventos utilizando o [aplicativo](https://github.com/rodrigodasilva/meetapp-mobile) feito em React-native, sendo toda a lógica gerenciada pela [api](https://github.com/rodrigodasilva/backend-meetapp) desenvolvida em NodeJS.
+
+## Tecnologias utilizadas
 
 - [axios](https://github.com/axios/axios)
 - [date-fns](https://github.com/date-fns/date-fns)
@@ -30,7 +35,7 @@ Esta é uma parte do projeto desenvolvido para o desafio final no Bootcamp da Ro
 - [redux-saga](https://github.com/redux-saga/redux-saga)
 - [styled-components](https://github.com/styled-components/styled-components)
 
-#### Como usar
+## Como usar
 
 Pré-requisitos:
 
