@@ -4,6 +4,7 @@ export const Container = styled.View`
   background: #fff;
   margin: 10px 20px;
   border-radius: 4px;
+  min-height: 300px;
 `;
 
 export const Banner = styled.Image`

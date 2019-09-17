@@ -15,7 +15,11 @@ export function* newSubscriptionRequest({ payload }) {
 
     Alert.alert('Concluido', 'Inscrição realizada com sucesso');
   } catch (err) {
-    Alert.alert('Erro', 'Erro ao se inscrever no evento');
+    console.tron.log(err);
+    Alert.alert(
+      'Conflito de horários',
+      'Você já se inscreveu em um meetup nesta data'
+    );
   }
 }
 

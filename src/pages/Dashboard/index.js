@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ActivityIndicator, TouchableOpacity, FlatList } from 'react-native';
 
@@ -18,13 +18,7 @@ import {
   newSubscriptionRequest,
 } from '~/store/modules/subscriptions/actions';
 
-import {
-  Container,
-  DateMeetup,
-  TextDate,
-  TextEmpty,
-  EmptyView,
-} from './styles';
+import { Container, DateMeetup, TextDate, TextEmpty } from './styles';
 
 export default function Dashboard() {
   const user = useSelector(state => state.user.profile);
@@ -46,8 +40,6 @@ export default function Dashboard() {
   useEffect(() => {
     async function loadMeetups() {
       try {
-        // if (loading) return;
-
         setLoading(true);
 
         const dateFormattedToSearch = format(dateSearch, 'yyyy-MM-dd', {
@@ -98,22 +90,6 @@ export default function Dashboard() {
     setPage(page + 1);
   }
 
-  function renderFooter() {
-    // if (!loadingBottom) {
-    //   return <EmptyView />;
-    // }
-
-    if (!loading) return null;
-
-    return (
-      <ActivityIndicator
-        size={30}
-        color="#F94D6A"
-        style={{ backgroundColor: 'rgba(0, 0, 0, 0.0)' }}
-      />
-    );
-  }
-
   return (
     <Background>
       <TopBar />
@@ -140,9 +116,8 @@ export default function Dashboard() {
             <FlatList
               showsVerticalScrollIndicator={false}
               data={meetups}
-              onEndReachedThreshold={0.01}
+              onEndReachedThreshold={0.3}
               onEndReached={loadMore}
-              ListFooterComponent={renderFooter}
               keyExtractor={item => String(item.id)}
               renderItem={({ item }) => (
                 <MeetupDashboard
