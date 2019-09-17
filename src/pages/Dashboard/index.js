@@ -116,7 +116,7 @@ export default function Dashboard() {
             <FlatList
               showsVerticalScrollIndicator={false}
               data={meetups}
-              onEndReachedThreshold={0.3}
+              onEndReachedThreshold={0.4}
               onEndReached={loadMore}
               keyExtractor={item => String(item.id)}
               renderItem={({ item }) => (

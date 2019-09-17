@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator } from 'react-native';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import IconMCI from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -32,12 +31,10 @@ export default function MeetupDashboard({
     setCheckIfUserAppIsEqualMeetupOrganizer,
   ] = useState('');
   const [checkStateSubscription, setCheckStateSubscription] = useState('');
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
-
     setDateFormatted(
       format(parseISO(data.date), "dd ' de ' MMMM ', às ' HH:mm'h'", {
         locale: pt,
@@ -52,8 +49,7 @@ export default function MeetupDashboard({
       })
     );
 
-    // setLoading(false);
-    setTimeout(() => setLoading(false), 4000);
+    setLoading(false);
   }, [data, idUserApp, subscriptions]);
 
   return (
@@ -139,7 +135,6 @@ export default function MeetupDashboard({
               height: 40,
               borderRadius: 4,
               width: '100%',
-              // marginBottom: 10,
             }}
             autoRun
             visible={!loading}

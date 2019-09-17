@@ -15,7 +15,6 @@ export function* newSubscriptionRequest({ payload }) {
 
     Alert.alert('Concluido', 'Inscrição realizada com sucesso');
   } catch (err) {
-    console.tron.log(err);
     Alert.alert(
       'Conflito de horários',
       'Você já se inscreveu em um meetup nesta data'
@@ -31,7 +30,7 @@ export function* deleteSubscriptionRequest({ payload }) {
 
     yield put(deleteSubscriptionSuccess(id));
 
-    Alert.alert('Concluido', 'Inscrição cancelada com sucesso');
+    Alert.alert('Concluído', 'Inscrição cancelada com sucesso');
   } catch (err) {
     Alert.alert('Erro', 'Erro ao cancelar inscrição no evento');
   }
