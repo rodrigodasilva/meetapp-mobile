@@ -8,7 +8,9 @@ Meetapp Mobile
 
 <p align="center">
   <a href="#tecnologias-utilizadas">Tecnologias utilizadas</a> |
-  <a href="#como-usar">Como Usar</a>
+  <a href="#como-usar">Como Usar</a> |
+  <a href="#funcionalidades">Funcionalidades</a>
+
 </p>
 
 <div align="center">
@@ -45,6 +47,7 @@ Esta é a parte frontend mobile de um projeto desenvolvido para o desafio final 
 
 Pré-requisitos:
 
+- Yarn/Npm
 - Emulador configurado para o react-native
 - [Back-end](https://github.com/rodrigodasilva/backend-meetapp) da aplicação rodando
 
@@ -59,3 +62,11 @@ E carregamos no emulador do android
 Ou, no emulador do iphone
 
 > react-native run-ios
+
+## Funcionalidades
+
+- Autenticação
+- Visualização dos meetups
+- Inscrição em meetups nos quais você não é organizador
+- Cancelamento das inscrições
+- Edição de dados do perfil
