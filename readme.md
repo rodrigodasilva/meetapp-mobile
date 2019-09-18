@@ -9,8 +9,7 @@ Meetapp Mobile
 
 <p align="center">
   <a href="#tecnologias-utilizadas">Tecnologias utilizadas</a> |
-  <a href="#como-usar">Como Usar</a> |
-  <a href="#funcionalidades">Funcinalidades</a>
+  <a href="#como-usar">Como Usar</a>
 </p>
 
 Esta é a parte frontend mobile de um projeto desenvolvido para o desafio final no Bootcamp da Rocketseat. Nele desenvolvemos um serviço onde os usuários podem criar eventos através da [aplicação Web](https://github.com/rodrigodasilva/meetapp-front-web) feita em ReactJS, e se inscrever nestes eventos utilizando este aplicativo feito em React-native, sendo toda a lógica gerenciada pela [api](https://github.com/rodrigodasilva/backend-meetapp) desenvolvida em NodeJS.
