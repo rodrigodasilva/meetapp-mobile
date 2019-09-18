@@ -1,17 +1,19 @@
 <h1 align="center">
-  <br>
-  <img src="https://user-images.githubusercontent.com/28466370/65008804-ebb08980-d8e0-11e9-8cd3-429342052438.png" width="150px">
-  <br>
-  Meetapp Web
-  <br>
+
+![](src/assets/logo-circle.png)
+Meetapp Mobile
+
 </h1>
 
+![](src/assets/meetapp_mobile.png)
+
 <p align="center">
-  <a href="#tecnologias-utilizadas">Tecnologias</a> |
-  <a href="#como-usar">Como Usar</a>
+  <a href="#tecnologias-utilizadas">Tecnologias utilizadas</a> |
+  <a href="#como-usar">Como Usar</a> |
+  <a href="#funcionalidades">Funcinalidades</a>
 </p>
 
-Esta é uma parte do projeto desenvolvido para o desafio final no Bootcamp da Rocketseat. Nele desenvolvemos um serviço onde os usuários podem criar eventos atráves da [aplicação Web](https://github.com/rodrigodasilva/meetapp-front-web) feita em ReactJS, e se inscrever nestes eventos utilizando o [aplicativo](https://github.com/rodrigodasilva/meetapp-mobile) feito em React-native, sendo toda a lógica gerenciada pela [api](https://github.com/rodrigodasilva/backend-meetapp) desenvolvida em NodeJS.
+Esta é a parte frontend mobile de um projeto desenvolvido para o desafio final no Bootcamp da Rocketseat. Nele desenvolvemos um serviço onde os usuários podem criar eventos através da [aplicação Web](https://github.com/rodrigodasilva/meetapp-front-web) feita em ReactJS, e se inscrever nestes eventos utilizando este aplicativo feito em React-native, sendo toda a lógica gerenciada pela [api](https://github.com/rodrigodasilva/backend-meetapp) desenvolvida em NodeJS.
 
 ## Tecnologias utilizadas
 

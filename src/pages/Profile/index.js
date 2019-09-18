@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Text } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -118,9 +117,7 @@ export default function Profile() {
             onChangeText={setConfirmPassword}
           />
 
-          <ButtonSubmit loading={loading} onPress={handleSubmit}>
-            Atualizar pefil
-          </ButtonSubmit>
+          <ButtonSubmit onPress={handleSubmit}>Atualizar pefil</ButtonSubmit>
 
           <ButtonSignOut onPress={handleSignOut}>Sair</ButtonSignOut>
         </Form>
