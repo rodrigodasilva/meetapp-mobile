@@ -22,9 +22,16 @@ export const Form = styled.ScrollView.attrs({
 
 export const FormInput = styled(Input)`
   font-size: 18px;
-  margin-bottom: 10px;
+  margin-top: 10px;
   height: 50px;
   border-radius: 4px;
+  border: ${props => (props.error ? '2px solid #f94d6a' : 'none')};
+`;
+
+export const TextError = styled.Text`
+  font-size: 14px;
+  color: #f94d6a;
+  align-self: flex-start;
 `;
 
 export const Separator = styled.View`
@@ -39,7 +46,7 @@ export const ButtonSubmit = styled(Button)`
   background: #e5556e;
   font-size: 18px;
   font-weight: bold;
-  margin-top: 5px;
+  margin-top: 15px;
   margin-bottom: 10px;
   height: 50px;
   width: 100%;

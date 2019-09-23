@@ -15,22 +15,29 @@ export const Container = styled.KeyboardAvoidingView.attrs({
 `;
 
 export const Logo = styled.Image`
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   width: 41px;
   height: 42px;
 `;
 
 export const FormInput = styled(Input)`
   font-size: 18px;
-  margin-bottom: 10px;
+  margin-top: 10px;
   height: 50px;
   border-radius: 4px;
+  border: ${props => (props.error ? '2px solid #f94d6a' : 'none')};
+`;
+
+export const TextError = styled.Text`
+  font-size: 14px;
+  color: #f94d6a;
+  align-self: flex-start;
 `;
 
 export const ButtonSubmit = styled(Button)`
   font-size: 18px;
   font-weight: bold;
-  margin-top: 5px;
+  margin-top: 15px;
   height: 50px;
   width: 100%;
   border-radius: 4px;
