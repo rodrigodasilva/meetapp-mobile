@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import IconMCI from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -154,3 +155,27 @@ export default function MeetupDashboard({
     </Container>
   );
 }
+
+MeetupDashboard.propTypes = {
+  data: PropTypes.shape({
+    id: PropTypes.number,
+    banner: PropTypes.string,
+    date: PropTypes.string,
+    location: PropTypes.string,
+    past: PropTypes.bool,
+    title: PropTypes.string,
+    User: PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.number,
+    }).isRequired,
+  }).isRequired,
+
+  textButton: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
+  idUserApp: PropTypes.string.isRequired,
+
+  subscriptions: PropTypes.shape({
+    id: PropTypes.number,
+    find: PropTypes.func,
+  }).isRequired,
+};

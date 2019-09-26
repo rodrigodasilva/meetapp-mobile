@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -63,7 +64,6 @@ export default function SignUp({ navigation }) {
             setFieldTouched,
             touched,
             errors,
-            isValid,
             handleSubmit,
           }) => (
             <>
@@ -127,3 +127,9 @@ export default function SignUp({ navigation }) {
     </Background>
   );
 }
+
+SignUp.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};

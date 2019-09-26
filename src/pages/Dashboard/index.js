@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ActivityIndicator, TouchableOpacity, FlatList } from 'react-native';
-
+import PropTypes from 'prop-types';
 import { format, addDays, subDays } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import IconAD from 'react-native-vector-icons/AntDesign';
@@ -140,9 +140,15 @@ export default function Dashboard() {
   );
 }
 
+const tabBarIcon = ({ tintColor }) => (
+  <IconAD name="bars" size={20} color={tintColor} />
+);
+
+tabBarIcon.propTypes = {
+  tintColor: PropTypes.string.isRequired,
+};
+
 Dashboard.navigationOptions = {
   tabBarLabel: 'Meetups',
-  tabBarIcon: ({ tintColor }) => (
-    <IconAD name="bars" size={20} color={tintColor} />
-  ),
+  tabBarIcon,
 };

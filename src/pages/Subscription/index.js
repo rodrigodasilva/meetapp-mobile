@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FlatList } from 'react-native';
-
+import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Background from '~/components/Background';
@@ -48,9 +48,15 @@ export default function Subscription() {
   );
 }
 
+const tabBarIcon = ({ tintColor }) => (
+  <Icon name="bookmark" size={20} color={tintColor} />
+);
+
+tabBarIcon.propTypes = {
+  tintColor: PropTypes.string.isRequired,
+};
+
 Subscription.navigationOptions = {
   tabBarLabel: 'Inscrições',
-  tabBarIcon: ({ tintColor }) => (
-    <Icon name="bookmark" size={20} color={tintColor} />
-  ),
+  tabBarIcon,
 };

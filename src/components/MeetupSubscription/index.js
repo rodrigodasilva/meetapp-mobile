@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
@@ -55,3 +56,27 @@ export default function MeetupSubscription({ data, textButton, onPress }) {
     </Container>
   );
 }
+
+MeetupSubscription.propTypes = {
+  data: PropTypes.shape({
+    Meetup: PropTypes.shape({
+      id: PropTypes.number,
+      banner: PropTypes.string,
+      date: PropTypes.string,
+      location: PropTypes.string,
+      title: PropTypes.string,
+      User: PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.number,
+      }).isRequired,
+    }).isRequired,
+  }).isRequired,
+
+  textButton: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
+
+  subscriptions: PropTypes.shape({
+    id: PropTypes.number,
+    find: PropTypes.func,
+  }).isRequired,
+};

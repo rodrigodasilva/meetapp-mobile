@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -27,7 +28,7 @@ const validateSchema = Yup.object().shape({
   password: Yup.string().required('Insira sua senha'),
 });
 
-export default function SignIn({ navigation, ...props }) {
+export default function SignIn({ navigation }) {
   const dispatch = useDispatch();
 
   dispatch(signUpFailure());
@@ -53,7 +54,6 @@ export default function SignIn({ navigation, ...props }) {
             setFieldTouched,
             touched,
             errors,
-            isValid,
             handleSubmit,
           }) => (
             <>
@@ -100,3 +100,9 @@ export default function SignIn({ navigation, ...props }) {
     </Background>
   );
 }
+
+SignIn.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};

@@ -35,7 +35,6 @@ export const TextError = styled.Text`
 `;
 
 export const Separator = styled.View`
-  /* height: 1px; */
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.1);
   margin-top: 10px;
