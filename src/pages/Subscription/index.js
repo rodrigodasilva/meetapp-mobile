@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Background from '~/components/Background';
 import TopBar from '~/components/TopBar';
-import MeetupSubscription from '~/components/MeetupSubscription';
+import Meetup from '~/components/Meetup';
 
 import { deleteSubscriptionRequest } from '~/store/modules/subscriptions/actions';
 
@@ -30,8 +30,8 @@ export default function Subscription() {
           data={subscriptions}
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
-            <MeetupSubscription
-              data={item}
+            <Meetup
+              meetup={item.Meetup}
               onPress={() => handleCancelSubscription(item.id)}
               textButton="Cancelar Inscrição"
             />

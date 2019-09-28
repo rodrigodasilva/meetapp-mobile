@@ -5,6 +5,7 @@ export const Container = styled.View`
   margin: 10px 20px;
   border-radius: 4px;
   min-height: 300px;
+  justify-content: ${props => (props.loading ? 'center' : 'space-between')};
 `;
 
 export const Banner = styled.Image`
@@ -47,8 +48,7 @@ export const Button = styled.TouchableOpacity`
   background: #f94d6a;
   border-radius: 4px;
 
-  display: ${props =>
-    props.checkIfUserAppIsEqualMeetupOrganizer || props.past ? 'none' : 'flex'};
+  display: ${props => (props.past ? 'none' : 'flex')};
   align-items: center;
   justify-content: center;
 `;
@@ -59,7 +59,7 @@ export const TextButton = styled.Text`
   font-weight: bold;
 `;
 
-export const TextAlreadySubscription = styled.Text`
+export const TextSubcripted = styled.Text`
   color: #f94d6a;
   font-size: 20px;
   font-weight: bold;

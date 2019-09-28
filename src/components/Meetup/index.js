@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import IconMCI from 'react-native-vector-icons/MaterialCommunityIcons';
-import IconMI from 'react-native-vector-icons/MaterialIcons';
 
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
+
+import IconMCI from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconMI from 'react-native-vector-icons/MaterialIcons';
 
 import {
   Container,
@@ -16,52 +17,36 @@ import {
   TextItem,
   Button,
   TextButton,
-  TextAlreadySubscription,
+  TextSubcripted,
 } from './styles';
 
-export default function MeetupDashboard({
-  data,
-  textButton,
-  onPress,
-  idUserApp,
-  subscriptions,
-}) {
-  const [dateFormatted, setDateFormatted] = useState('');
-  const [
-    checkIfUserAppIsEqualMeetupOrganizer,
-    setCheckIfUserAppIsEqualMeetupOrganizer,
-  ] = useState('');
+export default function Meetup({ meetup, subscriptions, textButton, onPress }) {
   const [checkStateSubscription, setCheckStateSubscription] = useState('');
   const [loading, setLoading] = useState(true);
+  const [dateFormatted, setDateFormatted] = useState('');
 
   useEffect(() => {
     setLoading(true);
     setDateFormatted(
-      format(parseISO(data.date), "dd ' de ' MMMM ', às ' HH:mm'h'", {
+      format(parseISO(meetup.date), "dd ' de ' MMMM ', às ' HH:mm'h'", {
         locale: pt,
       })
     );
 
-    setCheckIfUserAppIsEqualMeetupOrganizer(idUserApp === data.User.id);
-
-    setCheckStateSubscription(
-      subscriptions.find(subscription => {
-        return subscription.meetup_id === data.id;
-      })
-    );
+    if (subscriptions) {
+      setCheckStateSubscription(
+        subscriptions.find(subscription => {
+          return subscription.meetup_id === meetup.id;
+        })
+      );
+    }
 
     setLoading(false);
-  }, [data, idUserApp, subscriptions]);
+  }, [meetup, subscriptions]);
 
   return (
-    <Container>
-      <ShimmerPlaceHolder
-        style={{ height: 150, borderRadius: 4, width: '100%' }}
-        autoRun
-        visible={!loading}
-      >
-        <Banner source={{ uri: data.banner.urlGenymotion }} />
-      </ShimmerPlaceHolder>
+    <Container past={meetup.past} loading={loading}>
+      <Banner source={{ uri: meetup.banner.urlGenymotion }} />
 
       <Body>
         <ShimmerPlaceHolder
@@ -74,7 +59,7 @@ export default function MeetupDashboard({
           autoRun
           visible={!loading}
         >
-          <Title>{data.title}</Title>
+          <Title>{meetup.title}</Title>
         </ShimmerPlaceHolder>
 
         <ShimmerPlaceHolder
@@ -105,7 +90,7 @@ export default function MeetupDashboard({
         >
           <ViewTextItem>
             <IconMI name="location-on" size={14} color="#999" />
-            <TextItem>{data.location}</TextItem>
+            <TextItem>{meetup.location}</TextItem>
           </ViewTextItem>
         </ShimmerPlaceHolder>
 
@@ -121,15 +106,12 @@ export default function MeetupDashboard({
         >
           <ViewTextItem>
             <IconMI name="person" size={14} color="#999" />
-            <TextItem>
-              Organizado por:{' '}
-              {checkIfUserAppIsEqualMeetupOrganizer ? 'Você' : data.User.name}
-            </TextItem>
+            <TextItem>Organizado por: {meetup.User.name}</TextItem>
           </ViewTextItem>
         </ShimmerPlaceHolder>
 
         {checkStateSubscription ? (
-          <TextAlreadySubscription>Você está inscrito</TextAlreadySubscription>
+          <TextSubcripted subscripted>Inscrito</TextSubcripted>
         ) : (
           <ShimmerPlaceHolder
             style={{
@@ -140,13 +122,7 @@ export default function MeetupDashboard({
             autoRun
             visible={!loading}
           >
-            <Button
-              onPress={onPress}
-              checkIfUserAppIsEqualMeetupOrganizer={
-                checkIfUserAppIsEqualMeetupOrganizer
-              }
-              past={data.past}
-            >
+            <Button onPress={onPress} past={meetup.past}>
               <TextButton>{textButton}</TextButton>
             </Button>
           </ShimmerPlaceHolder>
@@ -156,26 +132,22 @@ export default function MeetupDashboard({
   );
 }
 
-MeetupDashboard.propTypes = {
-  data: PropTypes.shape({
+Meetup.propTypes = {
+  meetup: PropTypes.shape({
     id: PropTypes.number,
-    banner: PropTypes.string,
+    past: PropTypes.bool,
+    banner: PropTypes.shape({
+      urlGenymotion: PropTypes.string,
+    }).isRequired,
     date: PropTypes.string,
     location: PropTypes.string,
-    past: PropTypes.bool,
     title: PropTypes.string,
     User: PropTypes.shape({
       id: PropTypes.number,
-      name: PropTypes.number,
+      name: PropTypes.string,
     }).isRequired,
   }).isRequired,
 
   textButton: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
-  idUserApp: PropTypes.string.isRequired,
-
-  subscriptions: PropTypes.shape({
-    id: PropTypes.number,
-    find: PropTypes.func,
-  }).isRequired,
 };

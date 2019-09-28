@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ActivityIndicator, TouchableOpacity, FlatList } from 'react-native';
+import {
+  ActivityIndicator,
+  TouchableOpacity,
+  FlatList,
+  StatusBar,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { format, addDays, subDays } from 'date-fns';
 import pt from 'date-fns/locale/pt';
@@ -9,7 +14,7 @@ import IconFA from 'react-native-vector-icons/FontAwesome';
 
 import Background from '~/components/Background';
 import TopBar from '~/components/TopBar';
-import MeetupDashboard from '~/components/MeetupDashboard';
+import Meetup from '~/components/Meetup';
 
 import api from '~/services/api';
 
@@ -92,6 +97,7 @@ export default function Dashboard() {
 
   return (
     <Background>
+      <StatusBar backgroundColor="#191620" barStyle="light-content" />
       <TopBar />
 
       <DateMeetup>
@@ -120,13 +126,17 @@ export default function Dashboard() {
               onEndReached={loadMore}
               keyExtractor={item => String(item.id)}
               renderItem={({ item }) => (
-                <MeetupDashboard
-                  data={item}
-                  onPress={() => handleSubscription(item)}
-                  textButton="Realizar Inscrição"
-                  idUserApp={idUserApp}
-                  subscriptions={subscriptions}
-                />
+                <>
+                  {idUserApp !== item.User.id && (
+                    <Meetup
+                      meetup={item}
+                      onPress={() => handleSubscription(item)}
+                      textButton="Realizar Inscrição"
+                      idUserApp={idUserApp}
+                      subscriptions={subscriptions}
+                    />
+                  )}
+                </>
               )}
             />
           ) : (
